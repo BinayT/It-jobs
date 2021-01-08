@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Card } from 'react-bootstrap';
+import { Badge, Button, Card } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 
 function JobCard({ job }) {
@@ -21,11 +21,20 @@ function JobCard({ job }) {
               {job.type}
             </Badge>
             <Badge variant='info'>{job.location}</Badge>
-            <div>
+            <div style={{ wordBreak: 'break-all' }}>
               <ReactMarkdown source={job.how_to_apply} />
             </div>
           </div>
+          <img
+            className='d-sm-none d-md-block'
+            height='50'
+            alt={`${job.company}'s Logo`}
+            src={job.company_logo}
+          />
         </div>
+        <Card.Text>
+          <Button variant='primary'>View Details</Button>
+        </Card.Text>
       </Card.Body>
     </Card>
   );
