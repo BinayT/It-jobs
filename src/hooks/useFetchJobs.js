@@ -11,19 +11,26 @@ const useFetchJobs = (params, page) => {
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
 
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
     dispatch({ type: actionTypes.MAKE_REQUEST });
+
     try {
       async function fetchAPI() {
         const { data } = await axios.get(BASE_URL, {
+          cancelToken: cancelToken.token,
           params: { markdown: true, page: page, ...params },
         });
-        console.log(data);
         dispatch({ type: actionTypes.GET_DATA, payload: { jobs: data } });
       }
       fetchAPI();
     } catch (error) {
+      if (axios.isCancel(error)) return;
       dispatch({ type: actionTypes.ERROR, payload: error.message });
     }
+
+    return () => {
+      cancelToken.cancel();
+    };
   }, [params, page]);
   return state;
 };
