@@ -4,8 +4,7 @@ import axios from 'axios';
 import { actionTypes } from '../context/actionTypes';
 import { reducer } from '../context/reducer';
 
-const cors_anywhere = 'https://cors-anywhere.herokuapp.com/';
-const BASE_URL = `${cors_anywhere}https://jobs.github.com/positions.json`;
+const BASE_URL = `/positions.json`;
 
 const useFetchJobs = (params, page) => {
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
@@ -35,7 +34,10 @@ const useFetchJobs = (params, page) => {
           cancelToken: cancelToken2.token,
           params: { markdown: true, page: page + 1, ...params },
         });
-        dispatch({ type: actionTypes.GET_DATA, payload: { jobs: data } });
+        dispatch({
+          type: actionTypes.UPDATE_HAS_NEXT_PAGE,
+          payload: { hasNextPage: data.length !== 0 },
+        });
       }
       fetchAPI();
     } catch (error) {
