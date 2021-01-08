@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 
 import useFetchJobs from './hooks/useFetchJobs';
 import JobCard from './components/JobCard';
+import JobPagination from './components/JobPagination';
 
 function App() {
   const [params, setParams] = useState({});
@@ -11,11 +12,14 @@ function App() {
 
   return (
     <Container className='my-4'>
+      <h1 className='mb-4'>IT Jobs - Powered By Github</h1>
+      <JobPagination page={page} setPage={setPage} />
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error...</h1>}
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}
+      <JobPagination page={page} setPage={setPage} />
     </Container>
   );
 }
