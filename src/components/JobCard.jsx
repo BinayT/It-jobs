@@ -38,7 +38,7 @@ function JobCard({ job }) {
             variant='primary'
             onClick={() => setOpen((prevOpen) => !prevOpen)}
           >
-            View Details
+            {open ? 'Hide Details' : 'View Details'}
           </Button>
         </Card.Text>
         <Collapse in={open}>
