@@ -1,6 +1,6 @@
 import { actionTypes } from './actionTypes';
 
-export default function reducer(state, action) {
+export function reducer(state, action) {
   switch (action.type) {
     case actionTypes.MAKE_REQUEST:
       return { loading: true, jobs: [] };
