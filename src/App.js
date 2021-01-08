@@ -13,13 +13,13 @@ function App() {
   return (
     <Container className='my-4'>
       <h1 className='mb-4'>IT Jobs - Powered By Github</h1>
-      <JobPagination page={page} setPage={setPage} />
+      <JobPagination page={page} setPage={setPage} hasNextPage={true} />
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error...</h1>}
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}
-      <JobPagination page={page} setPage={setPage} />
+      <JobPagination page={page} setPage={setPage} hasNextPage={true} />
     </Container>
   );
 }

@@ -13,6 +13,8 @@ export function reducer(state, action) {
         error: action.payload.error,
         jobs: [],
       };
+    case actionTypes.UPDATE_HAS_NEXT_PAGE:
+      return { ...state, hasNextPage: action.payload.hasNextPage };
     default:
       return state;
   }
